@@ -104,6 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 #I added DRF authentication settings
 RESTFRAMEWORK={
+     'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated', 
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework.authentication.TokenAuthentication',
     ]
