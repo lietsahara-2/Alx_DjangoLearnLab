@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import BookListCreateAPIView, BookViewSet, LoginView #The APIs are imported
+from .views import BookListCreateAPIView, BookList, BookViewSet, LoginView #The APIs are imported
 #expanding functionality using DRF(routers)
 from rest_framework.routers import DefaultRouter
 
@@ -22,7 +22,8 @@ urlpatterns = router.urls
 router = DefaultRouter()
 router.register(r'books_all', BookViewSet, basename='book_all')
 urlpatterns=[
-    path('books/', BookListCreateAPIView.as_view(), name='book'),
+    #path('books/', BookListCreateAPIView.as_view(), name='book'),
+     path('books/', BookList.as_view(), name='book_list'),
     path('', include(router.urls)),
     path('login/', LoginView.as_view(), name='login'),
       ]
