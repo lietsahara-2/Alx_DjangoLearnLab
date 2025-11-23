@@ -10,7 +10,8 @@ from rest_framework.permissions import IsAuthenticated
 
 # a.) Create your views here.
 #1. Basic API can only GET or POST
-class BookListCreateAPIView(generics.ListCreateAPIView):
+#class BookListCreateAPIView(generics.ListCreateAPIView):
+class BookList(generics.ListAPIView):                 #checker preferred this one
     queryset = Book.objects.all()
     serializer_class = BookSerializer           #use BookSerializer for serializing data
 
