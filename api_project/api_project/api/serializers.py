@@ -5,3 +5,10 @@ class BookSerializer(serializers.ModelSerializer):    #defining the serializer c
     class Meta:                                     #configures what to serialize
         model = Book
         fields = "__all__"
+    
+#login serializer for user authentication 
+'''
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+'''
