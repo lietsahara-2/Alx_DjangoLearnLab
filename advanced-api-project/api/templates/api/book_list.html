@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Books</title>
+</head>
+<body>
+<h1>Books</h1>
+
+<ul>
+{% for book in book %}
+    <li>
+        <a href="{% url 'book-detail' book.pk %}">{{ book.title }}</a>
+        by {{ book.author.name }} ({{ book.publication_year }})
+        <a href="{% url 'book-update' book.pk %}">Edit</a>
+        <a href="{% url 'book-delete' book.pk %}">Delete</a>
+    </li>
+{% empty %}
+    <li>No books available.</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'book-create' %}">Add New Book</a>
+</body>
+</html>
