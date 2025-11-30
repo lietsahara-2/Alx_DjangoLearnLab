@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, filters #for generic class-based views & filtering
 
+from django_filters import rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -11,6 +12,8 @@ from .serializers import BookSerializer, AuthorSerializer
 #from django.views.generic.list import ListView
 #from django.views.generic.detail import DetailView
 #from django.views.generic.edit import CreateView, UpdateView, DeleteView #for website type views..??
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+
 
 #from django.urls import reverse_lazy #to avoid hardcoding urls
 
@@ -29,6 +32,7 @@ class BookListAPIView(generics.ListAPIView): #A ListView for retrieving all book
     filterset_fields = ["title", "author", "publication_year"]
     search_fields = ["title", "author__name", "publication_year"]#__tell django to look into related model field(since author is a foreign key)
     ordering_fields = ["title", "publication_year"]
+    permission_classes = [IsAuthenticated]
 
 
 class BookDetailAPIView(generics.RetrieveAPIView): #A DetailView for retrieving a single book by ID.
@@ -47,7 +51,7 @@ class BookCreateAPIView(generics.CreateAPIView):#A CreateView for adding a new b
     #template_name ="api/book_form.html"
     #fields = "__all__"
     #success_url = reverse_lazy("book-list")#redirect to book list after successful creation
-    
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class BookUpdateAPIView(generics.UpdateAPIView): #An UpdateView for modifying an existing book.
     queryset = Book.objects.all()
