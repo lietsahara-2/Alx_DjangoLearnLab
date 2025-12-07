@@ -1,0 +1,12 @@
+<h1>All Posts</h1>
+
+<form method="GET" action="{% url 'search' %}">
+    <input type="text" name="q" placeholder="Search posts...">
+</form>
+
+{% for post in posts %}
+    <h2><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h2>
+    <p>{{ post.content|truncatewords:25 }}</p>
+{% empty %}
+    <p>No posts yet.</p>
+{% endfor %}
